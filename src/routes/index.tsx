@@ -1,4 +1,4 @@
-import { createFileRoute, useRouter } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { generateBlueprint } from "@/lib/blueprint.functions";
@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Sparkles, Hammer, Workflow, Wand2 } from "lucide-react";
+import { Loader2, Sparkles, Hammer, Workflow, Wand2, Download } from "lucide-react";
+import { exportBlueprintPdf } from "@/lib/blueprint-pdf";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -105,6 +106,11 @@ function Index() {
 
         {result && (
           <div className="mt-8 space-y-6">
+            <div className="flex justify-end">
+              <Button variant="outline" onClick={() => exportBlueprintPdf(desc, result)}>
+                <Download className="mr-2 h-4 w-4" /> Export PDF
+              </Button>
+            </div>
             <Section icon={<Sparkles className="h-5 w-5" />} title="1. Ultra-Detailed Build Prompt">
               <Field label="Style" value={result.buildPrompt.style} />
               <Field label="Aesthetic" value={result.buildPrompt.aesthetic} />
