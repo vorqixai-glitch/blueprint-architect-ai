@@ -106,6 +106,11 @@ function Index() {
 
         {result && (
           <div className="mt-8 space-y-6">
+            <div className="flex justify-end">
+              <Button variant="outline" onClick={() => exportBlueprintPdf(desc, result)}>
+                <Download className="mr-2 h-4 w-4" /> Export PDF
+              </Button>
+            </div>
             <Section icon={<Sparkles className="h-5 w-5" />} title="1. Ultra-Detailed Build Prompt">
               <Field label="Style" value={result.buildPrompt.style} />
               <Field label="Aesthetic" value={result.buildPrompt.aesthetic} />
